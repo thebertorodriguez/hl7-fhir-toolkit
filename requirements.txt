@@ -1,5 +1,5 @@
 hl7==0.4.5
 fhir.resources==7.1.0
-fastapi==0.109.0
+fastapi==0.109.1
 pytest==7.4.3
 uvicorn==0.27.0
