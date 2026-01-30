@@ -106,11 +106,11 @@ class TestFHIRBuilder:
         builder = FHIRBuilder()
         patient = builder.build_patient(patient_data)
         
-        assert patient.resourceType == "Patient"
+        assert patient.resource_type == "Patient"
         assert patient.identifier[0].value == "123456789"
         assert patient.name[0].family == "DOE"
         assert patient.name[0].given[0] == "JOHN"
-        assert patient.birthDate == "1980-05-15"
+        assert str(patient.birthDate) == "1980-05-15"
         assert patient.gender == "male"
     
     def test_build_patient_full(self):
@@ -136,13 +136,13 @@ class TestFHIRBuilder:
         builder = FHIRBuilder()
         patient = builder.build_patient(patient_data)
         
-        assert patient.resourceType == "Patient"
+        assert patient.resource_type == "Patient"
         assert patient.identifier[0].value == "123456789"
         assert patient.name[0].family == "DOE"
         assert len(patient.name[0].given) == 2
         assert patient.name[0].given[0] == "JOHN"
         assert patient.name[0].given[1] == "ALEXANDER"
-        assert patient.birthDate == "1980-05-15"
+        assert str(patient.birthDate) == "1980-05-15"
         assert patient.gender == "male"
         assert patient.address[0].line[0] == "123 MAIN ST"
         assert patient.address[0].city == "ANYTOWN"
@@ -195,7 +195,7 @@ class TestConverter:
         converter = HL7ToFHIRConverter()
         patient = converter.convert(SAMPLE_HL7)
         
-        assert patient.resourceType == "Patient"
+        assert patient.resource_type == "Patient"
         assert patient.identifier[0].value == "123456789"
         assert patient.name[0].family == "DOE"
         assert patient.gender == "male"
@@ -236,7 +236,7 @@ class TestConverter:
         """Test convenience function convert_hl7_to_fhir."""
         patient = convert_hl7_to_fhir(SAMPLE_HL7)
         
-        assert patient.resourceType == "Patient"
+        assert patient.resource_type == "Patient"
         assert patient.identifier[0].value == "123456789"
     
     def test_convenience_function_convert_json(self):
@@ -261,11 +261,11 @@ class TestEndToEnd:
         patient = builder.build_patient(patient_data)
         
         # Verify result
-        assert patient.resourceType == "Patient"
+        assert patient.resource_type == "Patient"
         assert patient.identifier[0].value == "123456789"
         assert patient.name[0].family == "DOE"
         assert patient.name[0].given[0] == "JOHN"
-        assert patient.birthDate == "1980-05-15"
+        assert str(patient.birthDate) == "1980-05-15"
         assert patient.gender == "male"
         assert patient.address[0].city == "ANYTOWN"
         
@@ -282,5 +282,5 @@ class TestEndToEnd:
             converter = HL7ToFHIRConverter()
             patient = converter.convert(hl7_message)
             
-            assert patient.resourceType == "Patient"
+            assert patient.resource_type == "Patient"
             assert patient.identifier[0].value == "123456789"

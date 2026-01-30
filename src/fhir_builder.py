@@ -110,7 +110,7 @@ class FHIRBuilder:
             
             # Build patient resource
             patient = Patient(
-                resourceType="Patient",
+                resource_type="Patient",
                 identifier=identifiers if identifiers else None,
                 name=names if names else None,
                 gender=patient_data.get('gender') or None,

@@ -28,7 +28,9 @@ class HL7Parser:
             HL7ParserError: If the message cannot be parsed
         """
         try:
-            self.message = hl7.parse(message)
+            # Normalize line endings - HL7 library expects \r
+            normalized_message = message.replace('\n', '\r')
+            self.message = hl7.parse(normalized_message)
         except Exception as e:
             raise HL7ParserError(f"Failed to parse HL7 message: {str(e)}")
     
@@ -43,9 +45,8 @@ class HL7Parser:
             The segment if found, None otherwise
         """
         try:
-            segments = [seg for seg in self.message if str(seg[0]) == segment_id]
-            return segments[0] if segments else None
-        except Exception:
+            return self.message.segment(segment_id)
+        except (KeyError, AttributeError):
             return None
     
     def parse_patient_demographics(self) -> Dict[str, Any]:

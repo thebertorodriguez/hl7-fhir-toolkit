@@ -1,4 +1,4 @@
-python-hl7==2.5.3
+hl7==0.4.5
 fhir.resources==7.1.0
 fastapi==0.109.0
 pytest==7.4.3
