@@ -30,8 +30,8 @@ def main():
     # Convert to FHIR
     converter = HL7ToFHIRConverter()
     
-    # Get message info
-    converter.convert(hl7_message)
+    # Get message info (this also performs initial conversion)
+    fhir_json = converter.convert_to_json(hl7_message)
     message_info = converter.get_message_info()
     
     print("\n" + "=" * 80)
@@ -39,9 +39,6 @@ def main():
     print("=" * 80)
     for key, value in message_info.items():
         print(f"{key}: {value}")
-    
-    # Convert to FHIR JSON
-    fhir_json = converter.convert_to_json(hl7_message)
     
     print("\n" + "=" * 80)
     print("Output FHIR Patient Resource (JSON):")

@@ -273,7 +273,9 @@ class TestEndToEnd:
         """Test conversion using the sample file."""
         import os
         
-        sample_file = "/home/runner/work/hl7-fhir-toolkit/hl7-fhir-toolkit/examples/sample_hl7.txt"
+        # Use relative path from project root
+        project_root = os.path.dirname(os.path.dirname(__file__))
+        sample_file = os.path.join(project_root, "examples", "sample_hl7.txt")
         
         if os.path.exists(sample_file):
             with open(sample_file, 'r') as f:
