@@ -1,0 +1,5 @@
+python-hl7==2.5.3
+fhir.resources==7.1.0
+fastapi==0.109.0
+pytest==7.4.3
+uvicorn==0.27.0
